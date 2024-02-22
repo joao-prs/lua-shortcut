@@ -1,19 +1,37 @@
--- Solicita o nome do diretório ao usuário
-io.write("Digite o nome do diretório: ")
-    local nomeDiretorio = io.read()
-    
-    -- Verifica se o diretório já existe
-    local existeDiretorio = lfs.attributes(nomeDiretorio, "mode") == "directory"
-    
-    -- Se o diretório não existir, cria
-    if not existeDiretorio then
-        local success, errorMessage = lfs.mkdir(nomeDiretorio)
-        if success then
-            print("Diretório criado com sucesso!")
-        else
-            print("Erro ao criar diretório:", errorMessage)
-        end
+-- Função para verificar se um diretório existe
+function directoryExists(path)
+    local f = io.open(path, "r")
+    if f then
+        f:close()
+        return true
     else
-        print("O diretório já existe.")
+        return false
     end
-    
+end
+
+-- Função para criar um diretório
+function createDirectory(path)
+    local success, err = lfs.mkdir(path)
+    if success then
+        print("Diretório criado com sucesso!")
+    else
+        print("Erro ao criar diretório: " .. err)
+    end
+end
+
+-- Pergunta pelo nome do diretório
+print("Digite o nome do diretório:")
+local directoryName = io.read()
+
+-- Verifica se o diretório existe
+if directoryExists(directoryName) then
+    print("O diretório já existe.")
+else
+    print("O diretório não existe. Deseja criar? (sim/não)")
+    local answer = io.read()
+    if answer == "sim" then
+        createDirectory(directoryName)
+    else
+        print("Operação cancelada.")
+    end
+end
