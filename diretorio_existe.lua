@@ -11,11 +11,12 @@ end
 
 -- Função para criar um diretório
 function createDirectory(path)
-    local success, err = lfs.mkdir(path)
-    if success then
+    local command = "mkdir " .. path
+    local status, result, code = os.execute(command)
+    if status then
         print("Diretório criado com sucesso!")
     else
-        print("Erro ao criar diretório: " .. err)
+        print("Erro ao criar diretório: " .. result)
     end
 end
 
