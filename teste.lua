@@ -30,3 +30,17 @@ end
 
 -- end
 io.write("\n")
+
+
+a = {} -- cria uma tabela e armazena sua referência em 'a'
+k = "x"
+a[k] = 10 -- nova entrada, com chave="x" e valor=10
+a[20] = "great" -- nova entrada, com chave=20 e valor="great"
+print(a["x"]) --> 10
+k = 20
+print(a[k]) --> "great"
+a["x"] = a["x"] + 1 -- incrementa entrada "x"
+print(a["x"]) --> 11
+
+
+--p50
